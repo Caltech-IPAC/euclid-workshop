@@ -8,7 +8,7 @@ The workshop walks through how to pull Euclid Q1 data products out of the public
 
 | # | Item | Format | Time |
 | --- | --- | --- | --- |
-| 1 | **`1_intro.pdf`** — workshop framing, Euclid mission overview, what Q1 is, data-product acronyms (VIS, NISP, MER, SIR, SPE, PHZ), and Fornax sign-up. *Not in this repo yet — distributed separately at workshop time.* | slides | 15 min |
+| 1 | **`1_intro.pdf`** — workshop framing, Euclid mission overview, what Q1 is, data-product acronyms (VIS, NISP, MER, SIR, SPE, PHZ), and Fornax sign-up. *To be filled* | slides | 15 min |
 | 2 | **[`2_Euclid_data_cloud.ipynb`](2_Euclid_data_cloud.ipynb)** — TAP / SIA / direct-S3 patterns demonstrated on a single EDF-N source: MER catalog, MER mosaic cutout, SIR 1D spectrum, SPE line features. Closes with how to discover tables and columns yourself and a pointer to HATS for population-scale work. | notebook | 20 min |
 | 3 | **[`3_Euclid_clusters.ipynb`](3_Euclid_clusters.ipynb)** — applies the same toolkit to a high-richness Q1 galaxy cluster. ADQL `JOIN` across MER and PHZ for candidate members, DBSCAN against a control field 5′ away, over-density overlaid on H-band imaging. | notebook | 10 min |
 | 4 | **[`4_Euclid_AGN_assignment.ipynb`](4_Euclid_AGN_assignment.ipynb)** — 45-minute hands-on. Projects ~5k EDF-N AGN candidates onto a pre-trained color-SOM, compares selection methods (WISE, Gaia, DESI, …) on the same manifold, and verifies one candidate with three live cloud reads. [`4_Euclid_AGN_solutions.ipynb`](4_Euclid_AGN_solutions.ipynb) is the same notebook with every TODO filled in. | notebook | 45 min |
