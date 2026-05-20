@@ -15,13 +15,21 @@ __pycache__/
 venv/
 env/
 
-# Data / caches / large files
-data/
+# Large binary scientific data — usually too big for git.
+# (Workshop data files are individually exempted below.)
 *.fits
 *.fits.gz
 *.hdf5
 *.h5
 *.parquet
+
+# Workshop data — small (~8 MB total), shipped in-repo so coworkers
+# can clone and run without a separate download step.
+!data/cache/workshop_som.pkl
+!data/cache/workshop_train_edfn.fits
+!data/cache/workshop_agn_flags_edfn.fits
+!data/cache/workshop_agn_edfn.fits
+!data/cache/irsa_spectra_agn/*.npz
 
 # Editor / IDE
 .vscode/
