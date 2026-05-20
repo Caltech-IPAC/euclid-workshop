@@ -9,3 +9,4 @@ ipywidgets
 requests
 s3fs
 fsspec
+scikit-learn
