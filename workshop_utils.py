@@ -184,18 +184,25 @@ def fill_nan_nearest(m):
 # ===========================================================================
 # IRSA TAP batched query
 # ===========================================================================
-def tap_query_with_retry(adql, retries=5, base_delay=2.0, async_job=False):
-    """Run a TAP query with exponential backoff for transient failures.
+def irsa_with_retry(fn, *args, retries=5, base_delay=2.0, **kwargs):
+    """Call ``fn(*args, **kwargs)`` with exponential backoff for transient
+    IRSA failures.
 
-    IRSA's TAP endpoint occasionally returns 502/503/504 or VOTable parse
-    errors under load; these are not query bugs and clear on retry. Set
-    ``async_job=True`` for long queries that need the async TAP endpoint.
+    Use this around any ``Irsa.*`` call — ``query_tap``, ``query_sia``,
+    ``query_region``, ``list_collections``, etc. IRSA's TAP and SIA front-ends
+    occasionally return 502/503/504 or malformed VOTable responses under load;
+    these are server hiccups, not query bugs, and clear on retry.
+
+    Example::
+
+        sia = irsa_with_retry(Irsa.query_sia, pos=(coord, 1 * u.arcsec),
+                              collection='euclid_DpdMerBksMosaic')
     """
     import time
     last_exc = None
     for attempt in range(retries):
         try:
-            return Irsa.query_tap(adql, async_job=async_job).to_table()
+            return fn(*args, **kwargs)
         except Exception as exc:
             last_exc = exc
             msg = str(exc)
@@ -205,10 +212,22 @@ def tap_query_with_retry(adql, retries=5, base_delay=2.0, async_job=False):
             if not transient or attempt == retries - 1:
                 raise
             delay = base_delay * (2 ** attempt)
-            warnings.warn(f'TAP transient failure (attempt {attempt+1}/{retries}): {exc!r}; '
+            warnings.warn(f'IRSA transient failure (attempt {attempt+1}/{retries}): {exc!r}; '
                           f'retrying in {delay:.1f}s', RuntimeWarning)
             time.sleep(delay)
     raise last_exc  # unreachable, kept for static analysis
+
+
+def tap_query_with_retry(adql, retries=5, base_delay=2.0, async_job=False):
+    """Run a TAP ADQL query with exponential backoff for transient failures.
+
+    Convenience wrapper over :func:`irsa_with_retry` that calls
+    ``Irsa.query_tap(adql).to_table()``.
+    """
+    return irsa_with_retry(
+        lambda: Irsa.query_tap(adql, async_job=async_job).to_table(),
+        retries=retries, base_delay=base_delay,
+    )
 
 
 def batched_query(table, cols, ids, batch=BATCH, id_col='object_id', desc=None):
