@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Data / caches / large files
+data/
+*.fits
+*.fits.gz
+*.hdf5
+*.h5
+*.parquet
+
+# Editor / IDE
+.vscode/
+.idea/
