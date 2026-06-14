@@ -4,6 +4,8 @@ Hands-on materials for the AAS 248 workshop **"Euclid Data in the Cloud: Access,
 
 The workshop walks through how to pull Euclid Q1 data products out of the public IRSA cloud (TAP, SIA, direct S3 reads) and put them to work on real science: galaxy cluster identification and AGN selection. Total runtime is 90 minutes.
 
+> 📹 **Recorded version with more detail:** https://caltech-ipac.github.io/euclid-q1-webinar/
+
 ## Workshop arc
 
 | # | Item | Format | Time |
