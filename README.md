@@ -8,10 +8,12 @@ The workshop walks through how to pull Euclid Q1 data products out of the public
 
 | # | Item | Format | Time |
 | --- | --- | --- | --- |
-| 1 | **`1_intro.pdf`** — workshop framing, Euclid mission overview, what Q1 is, data-product acronyms (VIS, NISP, MER, SIR, SPE, PHZ), and Fornax sign-up. *To be filled* | slides | 15 min |
-| 2 | **[`2_Euclid_data_cloud.ipynb`](2_Euclid_data_cloud.ipynb)** — TAP / SIA / direct-S3 patterns demonstrated on a single EDF-N source: MER catalog, MER mosaic cutout, SIR 1D spectrum, SPE line features. Closes with how to discover tables and columns yourself and a pointer to HATS for population-scale work. | notebook | 20 min |
-| 3 | **[`3_Euclid_clusters.ipynb`](3_Euclid_clusters.ipynb)** — applies the same toolkit to a high-richness Q1 galaxy cluster. ADQL `JOIN` across MER and PHZ for candidate members, DBSCAN against a control field 5′ away, over-density overlaid on H-band imaging. | notebook | 10 min |
-| 4 | **[`4_Euclid_AGN_assignment.ipynb`](4_Euclid_AGN_assignment.ipynb)** — 45-minute hands-on. Projects ~5k EDF-N AGN candidates onto a pre-trained color-SOM, compares selection methods (WISE, Gaia, DESI, …) on the same manifold, and verifies one candidate with three live cloud reads. [`4_Euclid_AGN_solutions.ipynb`](4_Euclid_AGN_solutions.ipynb) is the same notebook with every TODO filled in. | notebook | 45 min |
+| 1 | **[`1_Intro.pdf`](1_Intro.pdf)** — workshop framing, Euclid mission overview, what Q1 is, data-product acronyms (VIS, NISP, MER, SIR, SPE, PHZ). | slides | 15 min |
+| 2 | **[`2_fornaxintro-desai.pdf`](2_fornaxintro-desai.pdf)** — NASA Fornax science platform overview and sign-up (Desai). | slides | 5 min |
+| 3 | **[`3_clouddata_raen.pdf`](3_clouddata_raen.pdf)** — cloud data access on IRSA: TAP, SIA, and direct S3 reads (Raen). | slides | 10 min |
+| 4 | **[`4_Euclid_data_cloud.ipynb`](4_Euclid_data_cloud.ipynb)** — TAP / SIA / direct-S3 patterns demonstrated on a single EDF-N source: MER catalog, MER mosaic cutout, SIR 1D spectrum, SPE line features. Closes with how to discover tables and columns yourself and a pointer to HATS for population-scale work. | notebook | 10 min |
+| 5 | **[`5_Euclid_clusters.ipynb`](5_Euclid_clusters.ipynb)** — applies the same toolkit to a high-richness Q1 galaxy cluster. ADQL `JOIN` across MER and PHZ for candidate members, DBSCAN against a control field 5′ away, over-density overlaid on H-band imaging. | notebook | 20 min |
+| 6 | **[`6_Euclid_AGN_assignment.ipynb`](6_Euclid_AGN_assignment.ipynb)** — 30-minute hands-on. Projects ~5k EDF-N AGN candidates onto a pre-trained color-SOM, compares selection methods (WISE, Gaia, DESI, …) on the same manifold, and verifies one candidate with three live cloud reads. [`6_Euclid_AGN_solutions.ipynb`](6_Euclid_AGN_solutions.ipynb) is the same notebook with every TODO filled in. | notebook | 30 min |
 
 ## Quick start
 
@@ -22,7 +24,7 @@ pip install -r requirements.txt
 jupyter lab          # or: jupyter notebook
 ```
 
-Open the notebooks in order (2 → 3 → 4). Everything except the AGN notebook's pre-trained SOM is fetched live from IRSA at run time, so you need network access during the workshop.
+Open the notebooks in order (4 → 5 → 6). Everything except the AGN notebook's pre-trained SOM is fetched live from IRSA at run time, so you need network access during the workshop.
 
 ## Prerequisites
 
@@ -36,12 +38,12 @@ The same code runs unchanged from a laptop or from a NASA Fornax JupyterLab sess
 
 | Path | Size | Purpose |
 | --- | --- | --- |
-| `data/cache/workshop_som.pkl` | 70 KB | Pre-trained Q1 color SOM (notebook 4). |
-| `data/cache/workshop_train_edfn.fits` | 5.9 MB | Training-galaxy BMU positions (notebook 4). |
-| `data/cache/workshop_agn_flags_edfn.fits` | 349 KB | EDF-N AGN candidate IDs, positions, redshifts, selection flags (notebook 4). |
+| `data/cache/workshop_som.pkl` | 70 KB | Pre-trained Q1 color SOM (notebook 6). |
+| `data/cache/workshop_train_edfn.fits` | 5.9 MB | Training-galaxy BMU positions (notebook 6). |
+| `data/cache/workshop_agn_flags_edfn.fits` | 349 KB | EDF-N AGN candidate IDs, positions, redshifts, selection flags (notebook 6). |
 | `data/cache/workshop_agn_edfn.fits` | 1.3 MB | Pre-projected fallback if Task 1's live TAP query fails. |
 | `data/cache/irsa_spectra_agn/2668535469662563116.npz` | 12 KB | Local cache of the default-seed AGN's SIR spectrum. |
-| `AAS247/euclid_q1_clusters.csv` | 4 KB | Q1 cluster catalog (notebook 3). |
+| `AAS247/euclid_q1_clusters.csv` | 4 KB | Q1 cluster catalog (notebook 5). |
 
 Total: ~8 MB. Everything else — MER photometry, mosaic imaging, SIR spectra, SPE line measurements — is pulled live from IRSA.
 
